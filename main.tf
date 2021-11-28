@@ -10,7 +10,7 @@ variable "vnet_name" {}
 variable "vnet_address_prefix" {}
 variable "mi_subnet_name" {}
 variable "mi_subnet_address_prefix" {}
-variable "sqlmi_administrator_login" {}
+variable "sqlmi_administrator_loginho" {}
 variable "sqlmi_administrator_password" {}
 
 # SQL MI from: https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/sql_managed_instance
@@ -184,7 +184,7 @@ resource "azurerm_sql_managed_instance" "example" {
   name                         = var.mi_name
   resource_group_name          = azurerm_resource_group.example.name
   location                     = azurerm_resource_group.example.location
-  administrator_login          = var.sqlmi_administrator_login
+  administrator_login          = var.sqlmi_administrator_loginho
   administrator_login_password = var.sqlmi_administrator_password
   license_type                 = "BasePrice"
   subnet_id                    = azurerm_subnet.example.id
