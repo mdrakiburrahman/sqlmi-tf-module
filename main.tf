@@ -12,6 +12,7 @@ variable "mi_subnet_name" {}
 variable "mi_subnet_address_prefix" {}
 variable "sqlmi_administrator_login" {}
 variable "sqlmi_administrator_password" {}
+variable "sqlmi_public_data_endpoint_enabled" {}
 
 # SQL MI from: https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/sql_managed_instance
 resource "azurerm_resource_group" "example" {
@@ -191,6 +192,7 @@ resource "azurerm_sql_managed_instance" "example" {
   sku_name                     = "GP_Gen5"
   vcores                       = 4
   storage_size_in_gb           = 32
+  public_data_endpoint_enabled = var.sqlmi_public_data_endpoint_enabled
 
   depends_on = [
     azurerm_subnet_network_security_group_association.example,
