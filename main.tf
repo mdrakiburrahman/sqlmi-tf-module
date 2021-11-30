@@ -149,7 +149,7 @@ resource "azurerm_subnet" "example" {
   name                 = var.mi_subnet_name
   resource_group_name  = azurerm_resource_group.example.name
   virtual_network_name = azurerm_virtual_network.example.name
-  address_prefixes     = var.mi_subnet_address_prefix
+  address_prefix       = var.mi_subnet_address_prefix
 
   delegation {
     name = "managedinstancedelegation"
