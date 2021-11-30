@@ -181,24 +181,24 @@ resource "azurerm_subnet_route_table_association" "example" {
   route_table_id = azurerm_route_table.example.id
 }
 
-resource "azurerm_sql_managed_instance" "example" {
-  name                         = var.mi_name
-  resource_group_name          = azurerm_resource_group.example.name
-  location                     = azurerm_resource_group.example.location
-  administrator_login          = var.sqlmi_administrator_login
-  administrator_login_password = var.sqlmi_administrator_password
-  license_type                 = "BasePrice"
-  subnet_id                    = azurerm_subnet.example.id
-  sku_name                     = "GP_Gen5"
-  vcores                       = 4
-  storage_size_in_gb           = 32
-  public_data_endpoint_enabled = var.sqlmi_public_data_endpoint_enabled
+# resource "azurerm_sql_managed_instance" "example" {
+#   name                         = var.mi_name
+#   resource_group_name          = azurerm_resource_group.example.name
+#   location                     = azurerm_resource_group.example.location
+#   administrator_login          = var.sqlmi_administrator_login
+#   administrator_login_password = var.sqlmi_administrator_password
+#   license_type                 = "BasePrice"
+#   subnet_id                    = azurerm_subnet.example.id
+#   sku_name                     = "GP_Gen5"
+#   vcores                       = 4
+#   storage_size_in_gb           = 32
+#   public_data_endpoint_enabled = var.sqlmi_public_data_endpoint_enabled
 
-  depends_on = [
-    azurerm_subnet_network_security_group_association.example,
-    azurerm_subnet_route_table_association.example,
-  ]
-}
+#   depends_on = [
+#     azurerm_subnet_network_security_group_association.example,
+#     azurerm_subnet_route_table_association.example,
+#   ]
+# }
 
 output "sqlmi_fqdn" {
     value  = azurerm_sql_managed_instance.example.fqdn
