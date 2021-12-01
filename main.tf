@@ -200,6 +200,6 @@ resource "azurerm_subnet_route_table_association" "example" {
 #   ]
 # }
 
-output "sqlmi_fqdn" {
-    value  = azurerm_sql_managed_instance.example.fqdn
-}
+# output "sqlmi_fqdn" {
+#     value  = azurerm_sql_managed_instance.example.fqdn
+# }
