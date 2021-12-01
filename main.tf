@@ -16,20 +16,17 @@ variable "sqlmi_public_data_endpoint_enabled" {}
 
 # SQL MI from: https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/sql_managed_instance
 resource "azurerm_resource_group" "example" {
-  provider = azurerm
   name     = var.resource_group_name
   location = var.resource_group_location
 }
 
 resource "azurerm_network_security_group" "example" {
-  provider            = azurerm
   name                = "mi-security-group"
   location            = azurerm_resource_group.example.location
   resource_group_name = azurerm_resource_group.example.name
 }
 
 resource "azurerm_network_security_rule" "allow_management_inbound" {
-  provider                    = azurerm
   name                        = "allow_management_inbound"
   priority                    = 106
   direction                   = "Inbound"
@@ -44,7 +41,6 @@ resource "azurerm_network_security_rule" "allow_management_inbound" {
 }
 
 resource "azurerm_network_security_rule" "allow_misubnet_inbound" {
-  provider                    = azurerm
   name                        = "allow_misubnet_inbound"
   priority                    = 200
   direction                   = "Inbound"
@@ -59,7 +55,6 @@ resource "azurerm_network_security_rule" "allow_misubnet_inbound" {
 }
 
 resource "azurerm_network_security_rule" "allow_health_probe_inbound" {
-  provider                    = azurerm
   name                        = "allow_health_probe_inbound"
   priority                    = 300
   direction                   = "Inbound"
@@ -74,7 +69,6 @@ resource "azurerm_network_security_rule" "allow_health_probe_inbound" {
 }
 
 resource "azurerm_network_security_rule" "allow_tds_inbound" {
-  provider                    = azurerm
   name                        = "allow_tds_inbound"
   priority                    = 1000
   direction                   = "Inbound"
@@ -89,7 +83,6 @@ resource "azurerm_network_security_rule" "allow_tds_inbound" {
 }
 
 resource "azurerm_network_security_rule" "deny_all_inbound" {
-  provider                    = azurerm
   name                        = "deny_all_inbound"
   priority                    = 4096
   direction                   = "Inbound"
@@ -104,7 +97,6 @@ resource "azurerm_network_security_rule" "deny_all_inbound" {
 }
 
 resource "azurerm_network_security_rule" "allow_management_outbound" {
-  provider                    = azurerm
   name                        = "allow_management_outbound"
   priority                    = 102
   direction                   = "Outbound"
@@ -119,7 +111,6 @@ resource "azurerm_network_security_rule" "allow_management_outbound" {
 }
 
 resource "azurerm_network_security_rule" "allow_misubnet_outbound" {
-  provider                    = azurerm
   name                        = "allow_misubnet_outbound"
   priority                    = 200
   direction                   = "Outbound"
@@ -134,7 +125,6 @@ resource "azurerm_network_security_rule" "allow_misubnet_outbound" {
 }
 
 resource "azurerm_network_security_rule" "deny_all_outbound" {
-  provider                    = azurerm
   name                        = "deny_all_outbound"
   priority                    = 4096
   direction                   = "Outbound"
@@ -149,7 +139,6 @@ resource "azurerm_network_security_rule" "deny_all_outbound" {
 }
 
 resource "azurerm_virtual_network" "example" {
-  provider            = azurerm
   name                = var.vnet_name
   resource_group_name = azurerm_resource_group.example.name
   address_space       = [var.vnet_address_prefix]
@@ -157,7 +146,6 @@ resource "azurerm_virtual_network" "example" {
 }
 
 resource "azurerm_subnet" "example" {
-  provider             = azurerm
   name                 = var.mi_subnet_name
   resource_group_name  = azurerm_resource_group.example.name
   virtual_network_name = azurerm_virtual_network.example.name
@@ -174,13 +162,11 @@ resource "azurerm_subnet" "example" {
 }
 
 resource "azurerm_subnet_network_security_group_association" "example" {
-  provider                  = azurerm
   subnet_id                 = azurerm_subnet.example.id
   network_security_group_id = azurerm_network_security_group.example.id
 }
 
 resource "azurerm_route_table" "example" {
-  provider                      = azurerm
   name                          = "routetable-mi"
   location                      = azurerm_resource_group.example.location
   resource_group_name           = azurerm_resource_group.example.name
@@ -191,7 +177,6 @@ resource "azurerm_route_table" "example" {
 }
 
 resource "azurerm_subnet_route_table_association" "example" {
-  provider       = azurerm
   subnet_id      = azurerm_subnet.example.id
   route_table_id = azurerm_route_table.example.id
 }
